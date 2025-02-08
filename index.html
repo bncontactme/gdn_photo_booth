@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Capture</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('background.jpg'); /* Set your background image */
+            background-size: cover;
+            overflow: hidden;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        video, canvas {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: absolute;
+        }
+
+        /* Button container to align buttons */
+        .button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px; /* Space between buttons */
+        }
+
+        /* Capture button */
+        #capture, #switch-scene {
+            padding: 15px 25px;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #capture:hover, #switch-scene:hover {
+            background: lightgray;
+        }
+
+        /* Click effect */
+        #capture.clicked, #switch-scene.clicked {
+            background-color: lightgray;
+            color: black;
+        }
+
+        /* Disabled button style */
+        button:disabled {
+            background-color: #d3d3d3;
+            color: #a9a9a9;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="webcam" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+
+        <!-- Button Container -->
+        <div class="button-container">
+            <button id="capture">💗 TOMA TU FOTO 💗</button>
+            <button id="switch-scene">🔄 CAMBIAR FILTRO</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("switch-scene").addEventListener("click", () => {
+            fetch("/rotate-scene")
+                .then(response => response.json())
+                .then(data => console.log(`Escena actual: ${data.scene}`))
+                .catch(error => console.error("Error al cambiar de escena:", error));
+        });
+    </script>
+
+    <script src="script.js"></script> <!-- External JavaScript file -->
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "name": "webcam-capture",
+    "version": "1.0.0",
+    "description": "A simple webcam capture app with Node.js and Express",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+  
